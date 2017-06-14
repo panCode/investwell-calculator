@@ -222,7 +222,7 @@ export class COD extends Component{
 
 	 			<View style={{alignItems:'center',flexDirection:'row',justifyContent:'center',padding:20}}>			
 					<View style = {{flex:6,backgroundColor:'#d9d9d9',height:60,borderRadius:5,width:70}}>
-				        <Text style = {styles.view}>Monthly Savings ghan</Text>
+				        <Text style = {styles.view}>Monthly Savings trewgrgve</Text>
 				        <Text style = {styles.view1}>(Rs.)</Text>
 					</View>
 					<View style ={{flex:6,alignItems:'center',justifyContent:'center'}}>
