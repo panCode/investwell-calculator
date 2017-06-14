@@ -146,7 +146,7 @@ export class COD extends Component{
 		sum=sum.toFixed();
 
 		let dsum =0;
-		for(var i=d;i<=(b-d);++i){
+		for(var i=1;i<=(b-d);++i){
 			dsum+=Number(a*Math.pow((1+c/(12*100)),i));
 		}
 		dsum=dsum.toFixed();
