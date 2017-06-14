@@ -1,0 +1,783 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Retirement_Result = undefined;
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require('./../node_modules/react-transform-hmr/lib/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/root/calculator/code/retirement_graph.js';
+
+var _reactNative = require('react-native');
+
+var _reactNativeWheelPickerAndroid = require('react-native-wheel-picker-android');
+
+var _reactNativePathjsCharts = require('react-native-pathjs-charts');
+
+var _reactNavigation = require('react-navigation');
+
+var _reactNativeModalPicker = require('react-native-modal-picker');
+
+var _reactNativeModalPicker2 = _interopRequireDefault(_reactNativeModalPicker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  Retirement_Result: {
+    displayName: 'Retirement_Result'
+  }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+  filename: '/root/calculator/code/retirement_graph.js',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+  };
+}
+
+var _Dimensions$get = _reactNative.Dimensions.get('window'),
+    height = _Dimensions$get.height,
+    width = _Dimensions$get.width;
+
+var Retirement_Result = exports.Retirement_Result = _wrapComponent('Retirement_Result')((_temp = _class = function (_React$Component) {
+  _inherits(Retirement_Result, _React$Component);
+
+  function Retirement_Result(props) {
+    _classCallCheck(this, Retirement_Result);
+
+    var _this = _possibleConstructorReturn(this, (Retirement_Result.__proto__ || Object.getPrototypeOf(Retirement_Result)).call(this, props));
+
+    _this.state = {
+      shortfall_string: "Shortfall Corpus",
+      extra_yearly_savings_string: "Monthly Expenses Just After Retirement ",
+      color: 'red'
+    };
+    return _this;
+  }
+
+  _createClass(Retirement_Result, [{
+    key: 'render',
+    value: function render() {
+      var params = this.props.navigation.state.params;
+
+      var p_age = params.a;
+      var r_age = params.b;
+      var m_expenses = params.c;
+      var m_savings = params.d;
+      var i_rate = params.e;
+      var pre_return = params.f;
+      var post_return = params.g;
+      var l_expectancy = params.h;
+      var years_to_retirement = r_age - p_age;
+
+      var power1 = Math.pow(1 + pre_return / 100, years_to_retirement);
+      var savings = m_savings * 12 * ((power1 - 1) / (pre_return / 100)) * (1 + pre_return / 100);
+
+      var toDie_months = (l_expectancy - p_age) * 12;
+
+      var count1 = 0;
+      var monthly_expense = m_expenses;
+      while (count1 < years_to_retirement) {
+        monthly_expense = monthly_expense * (1 + i_rate / 100);
+        count1++;
+      }
+
+      var count4 = 0;
+      var initial_withdrawl = m_expenses * 12 * Math.pow(1 + i_rate / 100, years_to_retirement);
+
+
+      var p = 0;
+      var I = Number(1 + i_rate / 100);
+      var Y = Number(1 + post_return / 100);
+
+
+      var sum = 0;
+      for (var i = 0; i < years_to_retirement; ++i) {
+        sum += Math.pow(I, i) * Math.pow(Y, toDie_months / 12 - i) / Math.pow(Y, toDie_months / 12);
+      }
+      var p_previous_last = Number(sum) + initial_withdrawl;
+
+      var shortfall_corpus = p_previous_last - savings;
+      var extra_yearly_savings = void 0;
+      if (shortfall_corpus > 0) {
+        var power2 = Math.pow(1 + pre_return / 100, years_to_retirement);
+        extra_yearly_savings = shortfall_corpus / ((power2 - 1) / (pre_return / 100));
+      } else {}
+
+      if (shortfall_corpus < 0) {
+        return _react3.default.createElement(
+          _reactNative.ScrollView,
+          { style: { flex: 1, backgroundColor: '#ffffff' }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 111
+            }
+          },
+          _react3.default.createElement(
+            _reactNative.View,
+            { style: { flex: 1, backgroundColor: '#b3ffd9', height: 50, justifyContent: 'center', padding: 10 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 113
+              }
+            },
+            _react3.default.createElement(
+              _reactNative.Text,
+              { style: { color: '#000000', fontSize: 19, padding: 10 }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 114
+                }
+              },
+              'Summary'
+            ),
+            _react3.default.createElement(_reactNative.Text, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 115
+              }
+            })
+          ),
+          _react3.default.createElement(
+            _reactNative.View,
+            { style: { flexDirection: 'column', padding: 10 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 117
+              }
+            },
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 118
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 119
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 123
+                    }
+                  },
+                  'Years To Retirement '
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 125
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 129
+                    }
+                  },
+                  'Rs. ',
+                  (r_age - p_age).toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 132
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center',
+                    backgroundColor: '#bab6b6',
+                    borderRadius: 4
+
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 133
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 140
+                    }
+                  },
+                  'Monthly Expenses Just After Retirement '
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 142
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 146
+                    }
+                  },
+                  'Rs. ',
+                  monthly_expense.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 149
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 150
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 154
+                    }
+                  },
+                  'Corpus Accumulated due to Savings'
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 156
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 160
+                    }
+                  },
+                  'Rs. ',
+                  savings.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 163
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 164
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 168
+                    }
+                  },
+                  'Corpus Required at Retirement:'
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 170
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 174
+                    }
+                  },
+                  'Rs. ',
+                  p_previous_last.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 178
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 179
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: 'black' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 183
+                    }
+                  },
+                  'Shortfall Corpus'
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 185
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 189
+                    }
+                  },
+                  'Rs. ',
+                  shortfall_corpus.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 193
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 194
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: 'black' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 198
+                    }
+                  },
+                  'Extra Monthly Savings '
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 200
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 204
+                    }
+                  },
+                  'Rs. ',
+                  extra_yearly_savings.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            )
+          )
+        );
+      } else {
+        _react3.default.createElement(
+          _reactNative.ScrollView,
+          { style: { flex: 1, backgroundColor: '#ffffff' }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 217
+            }
+          },
+          _react3.default.createElement(
+            _reactNative.View,
+            { style: { flex: 1, backgroundColor: '#b3ffd9', height: 50, justifyContent: 'center', padding: 10 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 219
+              }
+            },
+            _react3.default.createElement(
+              _reactNative.Text,
+              { style: { color: '#000000', fontSize: 19, padding: 10 }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 220
+                }
+              },
+              'Summary'
+            ),
+            _react3.default.createElement(_reactNative.Text, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 221
+              }
+            })
+          ),
+          _react3.default.createElement(
+            _reactNative.View,
+            { style: { flexDirection: 'column', padding: 10 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 223
+              }
+            },
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 224
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 225
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 229
+                    }
+                  },
+                  'Years To Retirement '
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 231
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 235
+                    }
+                  },
+                  'Rs. ',
+                  (r_age - p_age).toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 238
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center',
+                    backgroundColor: '#bab6b6',
+                    borderRadius: 4
+
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 239
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 246
+                    }
+                  },
+                  'Monthly Expenses Just After Retirement '
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 248
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 252
+                    }
+                  },
+                  'Rs. ',
+                  monthly_expense.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 255
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 256
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 260
+                    }
+                  },
+                  'Corpus Accumulated due to Savings'
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 262
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 266
+                    }
+                  },
+                  'Rs. ',
+                  savings.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactNative.View,
+              { style: { flexDirection: 'column' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 269
+                }
+              },
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 270
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 274
+                    }
+                  },
+                  'Corpus Required at Retirement:'
+                )
+              ),
+              _react3.default.createElement(
+                _reactNative.View,
+                { style: {
+                    flex: 1,
+                    alignItems: 'center'
+                  }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 276
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontWeight: 'normal', fontSize: 17, color: '#1a1a1a' }, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 280
+                    }
+                  },
+                  'Rs. ',
+                  p_previous_last.toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                  ' '
+                )
+              )
+            )
+          )
+        );
+      }
+    }
+  }]);
+
+  return Retirement_Result;
+}(_react3.default.Component), _class.navigationOptions = {
+  title: 'Result'
+}, _temp));
+
+var styles = _reactNative.StyleSheet.create({
+  text: {
+    color: '#000000',
+    fontSize: 17,
+    textShadowRadius: 1
+  },
+  bigblue: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 25,
+    includeFontPadding: true,
+    fontStyle: 'normal',
+    textShadowRadius: 40
+  },
+  view: {
+    color: '#000000',
+    fontWeight: 'bold',
+    fontSize: 16,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    textAlign: 'center'
+  },
+  container: {
+    height: 450,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff'
+  }
+});
+var stylesbutton = _reactNative.StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    color: '#000066'
+  },
+  welcomePress: {
+    fontSize: 20,
+    textAlign: 'auto',
+    margin: 10,
+    color: '#ffffff'
+  },
+  button: {
+    borderColor: '#000066',
+    borderWidth: 7,
+    borderRadius: 10
+  },
+  buttonPress: {
+    borderColor: '#000066',
+    backgroundColor: '#000066',
+    borderWidth: 1,
+    borderRadius: 10
+  }
+});

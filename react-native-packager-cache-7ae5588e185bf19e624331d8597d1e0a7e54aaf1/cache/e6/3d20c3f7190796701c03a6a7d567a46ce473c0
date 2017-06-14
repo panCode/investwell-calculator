@@ -1,0 +1,127 @@
+'use strict';
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require('./../react-transform-hmr/lib/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsxFileName = '/root/calculator/node_modules/react-native-wheel-picker-android/WheelPicker.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require('react-native');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  WheelPicker: {
+    displayName: 'WheelPicker'
+  }
+};
+
+var _reactTransformHmrLibIndexJs2 = (0, _index2.default)({
+  filename: '/root/calculator/node_modules/react-native-wheel-picker-android/WheelPicker.js',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _reactTransformHmrLibIndexJs2(Component, id);
+  };
+}
+
+var WheelPickerView = (0, _reactNative.requireNativeComponent)('WheelPicker', WheelPicker);
+
+var WheelPicker = _wrapComponent('WheelPicker')(function (_React$Component) {
+  _inherits(WheelPicker, _React$Component);
+
+  function WheelPicker(props) {
+    _classCallCheck(this, WheelPicker);
+
+    var _this = _possibleConstructorReturn(this, (WheelPicker.__proto__ || Object.getPrototypeOf(WheelPicker)).call(this, props));
+
+    _this.onItemSelected = _this.onItemSelected.bind(_this);
+    _this.state = {
+      selectedItemPosition: 0
+    };
+    return _this;
+  }
+
+  _createClass(WheelPicker, [{
+    key: 'onItemSelected',
+    value: function onItemSelected(event) {
+      if (!this.props.onItemSelected) {
+        return;
+      }
+      this.props.onItemSelected(event.nativeEvent);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.setState({ selectedItemPosition: this.props.selectedItemPosition });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react3.default.createElement(WheelPickerView, _extends({}, this.props, {
+        onChange: this.onItemSelected,
+        data: this.props.data,
+        isCurved: this.props.isCurved,
+        isCyclic: this.props.isCyclic,
+        isAtmospheric: this.props.isAtmospheric,
+        selectedItemTextColor: this.props.selectedItemTextColor,
+        itemSpace: this.props.itemSpace,
+        visibleItemCount: this.props.visibleItemCount,
+        renderIndicator: this.props.renderIndicator,
+        indicatorColor: this.props.indicatorColor,
+        isCurtain: this.props.isCurtain,
+        curtainColor: this.props.curtainColor,
+        itemTextColor: this.props.itemTextColor,
+        itemTextSize: this.props.itemTextSize,
+        itemTextFontFamily: this.props.itemTextFontFamily,
+        selectedItemPosition: this.state.selectedItemPosition,
+        backgroundColor: this.props.backgroundColor,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28
+        }
+      }));
+    }
+  }]);
+
+  return WheelPicker;
+}(_react3.default.Component));
+
+WheelPicker.propTypes = _extends({}, _reactNative.View.propTypes, {
+  onItemSelected: _react3.default.PropTypes.func,
+  data: _react2.PropTypes.array,
+  isCurved: _react2.PropTypes.bool,
+  isCyclic: _react2.PropTypes.bool,
+  isAtmospheric: _react2.PropTypes.bool,
+  selectedItemTextColor: _react2.PropTypes.string,
+  itemSpace: _react2.PropTypes.number,
+  visibleItemCount: _react2.PropTypes.number,
+  renderIndicator: _react2.PropTypes.bool,
+  indicatorColor: _react2.PropTypes.string,
+  isCurtain: _react2.PropTypes.bool,
+  curtainColor: _react2.PropTypes.string,
+  itemTextColor: _react2.PropTypes.string,
+  itemTextSize: _react2.PropTypes.number,
+  itemTextFontFamily: _react2.PropTypes.string,
+  selectedItemPosition: _react2.PropTypes.number,
+  backgroundColor: _react2.PropTypes.string
+});
+module.exports = WheelPicker;

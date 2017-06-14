@@ -1,0 +1,567 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.step_up = undefined;
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require('./../node_modules/react-transform-hmr/lib/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/root/calculator/code/Step_up.js';
+
+var _reactNative = require('react-native');
+
+var _reactNativeWheelPickerAndroid = require('react-native-wheel-picker-android');
+
+var _reactNativePathjsCharts = require('react-native-pathjs-charts');
+
+var _reactNavigation = require('react-navigation');
+
+var _reactNativeModalPicker = require('react-native-modal-picker');
+
+var _reactNativeModalPicker2 = _interopRequireDefault(_reactNativeModalPicker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+	step_up: {
+		displayName: 'step_up'
+	}
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+	filename: '/root/calculator/code/Step_up.js',
+	components: _components,
+	locals: [module],
+	imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+	return function (Component) {
+		return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+	};
+}
+
+var _Dimensions$get = _reactNative.Dimensions.get('window'),
+    height = _Dimensions$get.height,
+    width = _Dimensions$get.width;
+
+var step_up = exports.step_up = _wrapComponent('step_up')((_temp = _class = function (_Component) {
+	_inherits(step_up, _Component);
+
+	function step_up(props) {
+		_classCallCheck(this, step_up);
+
+		var _this = _possibleConstructorReturn(this, (step_up.__proto__ || Object.getPrototypeOf(step_up)).call(this, props));
+
+		_this.state = {
+			savings: 1000,
+			period: 2,
+			ror: 10,
+			increment: 1000,
+			sip_amount: 39338
+		};
+		return _this;
+	}
+
+	_createClass(step_up, [{
+		key: 'change_savings',
+		value: function change_savings(value) {
+			var a = value;
+			a = a < 1000 || a === NaN ? 1000 : a;
+			var b = this.state.period * 12;
+			var c = this.state.ror;
+			var d = this.state.increment;
+			var sum = 0;
+			var k = -1;
+			for (var i = 0; i < b; ++i) {
+				if (i % 12 === 0) ++k;
+				sum += Number((Number(k * d) + Number(a)) * Math.pow(1 + c / (12 * 100), b - i));
+			}
+			sum = sum.toFixed();
+			this.setState({
+				savings: value,
+				sip_amount: sum
+			});
+		}
+	}, {
+		key: 'change_period',
+		value: function change_period(option) {
+			var a = this.state.savings;
+			a = a < 1000 || a === NaN ? 1000 : a;
+			var b = option.label * 12;
+			var c = this.state.ror;
+			var d = this.state.increment;
+			var sum = 0;
+			var k = -1;
+			for (var i = 0; i < b; ++i) {
+				if (i % 12 == 0) ++k;
+				sum += Number((Number(k * d) + Number(a)) * Math.pow(1 + c / (12 * 100), b - i));
+			}
+			sum = sum.toFixed();
+			this.setState({
+				period: option.label,
+				sip_amount: sum
+			});
+		}
+	}, {
+		key: 'change_ror',
+		value: function change_ror(option) {
+			var a = this.state.savings;
+			a = a < 1000 || a === NaN ? 1000 : a;
+			var b = this.state.period * 12;
+			var c = option.label;
+			var d = this.state.increment;
+			var sum = 0;
+			var k = -1;
+			for (var i = 0; i < b; ++i) {
+				if (i % 12 == 0) ++k;
+				sum += Number((Number(k * d) + Number(a)) * Math.pow(1 + c / (12 * 100), b - i));
+			}
+			sum = sum.toFixed();
+			this.setState({
+				ror: option.label,
+				sip_amount: sum
+			});
+		}
+	}, {
+		key: 'change_increment',
+		value: function change_increment(option) {
+			var a = this.state.savings;
+			a = a < 1000 || a === NaN ? 1000 : a;
+			var b = this.state.period * 12;
+			var c = this.state.ror;
+			var d = option.label;
+			var sum = 0;
+			var k = -1;
+			for (var i = 0; i < b; ++i) {
+				if (i % 12 == 0) ++k;
+				sum += Number((Number(k * d) + Number(a)) * Math.pow(1 + c / (12 * 100), b - i));
+			}
+			sum = sum.toFixed();
+			this.setState({
+				increment: option.label,
+				sip_amount: sum
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var navigate = this.props.navigation.navigate;
+
+			var ydata = [];
+			for (var i = 2; i <= 30; ++i) {
+				var object = {};
+				object["key"] = i;
+				object["label"] = "" + i + "";
+				ydata.push(object);
+			}
+			var rdata = [];
+			for (var _i = 0; _i <= 30; ++_i) {
+				var obj = {};
+				obj["key"] = _i;
+				obj["label"] = "" + _i + "";
+				rdata.push(obj);
+			}
+			var incdata = [];
+			for (var _i2 = 1000; _i2 <= 100000; _i2 += 1000) {
+				var _obj = {};
+				_obj["key"] = _i2;
+				_obj["label"] = "" + _i2 + "";
+				incdata.push(_obj);
+			}
+
+			return _react3.default.createElement(
+				_reactNative.ScrollView,
+				{ KeyboardShouldPersistTaps: 'always', style: { backgroundColor: '#ffffff', padding: 5 }, __source: {
+						fileName: _jsxFileName,
+						lineNumber: 131
+					}
+				},
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { backgroundColor: '#ffffff' }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 132
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.Text,
+						{ style: styles.text, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 133
+							}
+						},
+						'This calculator will help you to visualize the amount accumulated with Regular Investment with an Annual Increase (Step-up SIP)!'
+					)
+				),
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { alignItems: 'center', flexDirection: 'row', justifyContent: 'center', padding: 20 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 135
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 6, backgroundColor: '#d9d9d9', height: 60, borderRadius: 5, width: 70, justifyContent: 'center' }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 136
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 137
+								}
+							},
+							'Monthly Savings'
+						),
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view1, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 138
+								}
+							},
+							'(Rs.)'
+						)
+					),
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 6, alignItems: 'center', justifyContent: 'center' }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 140
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.View,
+							{ style: { width: 90, height: 40, backgroundColor: '#ffffff' }, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 141
+								}
+							},
+							_react3.default.createElement(_reactNative.TextInput, {
+								style: { borderWidth: 1, borderColor: '#d9d9d9', padding: 10, height: 40, width: 90, color: '#000000', textShadowRadius: 0, fontSize: 17, textAlign: 'center' },
+								underlineColorAndroid: 'white',
+								keyboardType: 'numeric',
+								placeholder: '1000',
+								editable: true,
+								value: this.state.savings,
+								onChangeText: function onChangeText(value) {
+									return _this2.change_savings(value);
+								},
+								__source: {
+									fileName: _jsxFileName,
+									lineNumber: 142
+								}
+							})
+						)
+					)
+				),
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 20 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 155
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 10, width: 150, height: 60, alignItems: 'center', justifyContent: 'center', backgroundColor: '#d9d9d9', borderRadius: 5 }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 156
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 157
+								}
+							},
+							'Yearly Increment'
+						),
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view1, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 158
+								}
+							},
+							'(Rs.)'
+						)
+					),
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 10, width: 200, alignItems: 'center', justifyContent: 'flex-start' }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 160
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.View,
+							{ style: { flex: 1, alignItems: 'center', justifyContent: 'center' }, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 161
+								}
+							},
+							_react3.default.createElement(
+								_reactNativeModalPicker2.default,
+								{
+									data: incdata,
+									onChange: function onChange(option) {
+										_this2.change_increment(option);
+									}, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 162
+									}
+								},
+								_react3.default.createElement(_reactNative.TextInput, {
+									style: { borderWidth: 1, borderColor: '#d9d9d9', padding: 10, height: 40, width: 90, color: '#000000', textShadowRadius: 0, fontSize: 17 },
+									editable: false,
+									placeholder: '     1000 ',
+									value: this.state.increment, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 166
+									}
+								})
+							)
+						)
+					)
+				),
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 20 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 178
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 10, width: 150, height: 60, alignItems: 'center', justifyContent: 'center', backgroundColor: '#d9d9d9', borderRadius: 5 }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 179
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 180
+								}
+							},
+							'Investment Period'
+						),
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view1, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 181
+								}
+							},
+							'(years)'
+						)
+					),
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 10, width: 200, alignItems: 'center', justifyContent: 'flex-start' }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 183
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.View,
+							{ style: { flex: 1, alignItems: 'center', justifyContent: 'center' }, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 184
+								}
+							},
+							_react3.default.createElement(
+								_reactNativeModalPicker2.default,
+								{
+									data: ydata,
+									onChange: function onChange(option) {
+										_this2.change_period(option);
+									}, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 185
+									}
+								},
+								_react3.default.createElement(_reactNative.TextInput, {
+									style: { borderWidth: 1, borderColor: '#d9d9d9', padding: 10, height: 40, width: 90, color: '#000000', textShadowRadius: 0, fontSize: 17 },
+									editable: false,
+									placeholder: '     2 ',
+									value: this.state.period, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 189
+									}
+								})
+							)
+						)
+					)
+				),
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 20 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 200
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 9, width: 150, alignItems: 'center', justifyContent: 'center', backgroundColor: '#d9d9d9', borderRadius: 5, padding: 10 }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 201
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.Text,
+							{ style: styles.view, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 202
+								}
+							},
+							'Expected Rate of Return',
+							_react3.default.createElement(
+								_reactNative.Text,
+								{ style: { fontWeight: 'normal', fontSize: 15, color: '#595959' }, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 202
+									}
+								},
+								'(%)'
+							)
+						)
+					),
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { flex: 10, width: 200, alignItems: 'center', justifyContent: 'center' }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 204
+							}
+						},
+						_react3.default.createElement(
+							_reactNative.View,
+							{ style: { flex: 1, justifyContent: 'center' }, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 205
+								}
+							},
+							_react3.default.createElement(
+								_reactNativeModalPicker2.default,
+								{
+									data: rdata,
+									onChange: function onChange(option) {
+										_this2.change_ror(option);
+									}, __source: {
+										fileName: _jsxFileName,
+										lineNumber: 206
+									}
+								},
+								_react3.default.createElement(_reactNative.TextInput, {
+									style: { borderWidth: 1, borderColor: '#d9d9d9', padding: 10, height: 40, width: 90, color: '#000000', textShadowRadius: 0, fontSize: 17 },
+									editable: false,
+									placeholder: '    10',
+									value: this.state.ror,
+									__source: {
+										fileName: _jsxFileName,
+										lineNumber: 209
+									}
+								})
+							)
+						)
+					)
+				),
+				_react3.default.createElement(
+					_reactNative.View,
+					{ style: { alignItems: 'center', justifyContent: 'flex-start', padding: 28, height: 200 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 220
+						}
+					},
+					_react3.default.createElement(
+						_reactNative.View,
+						{ style: { width: 120 }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 221
+							}
+						},
+						_react3.default.createElement(_reactNative.Button, {
+							style: { width: 600 },
+							onPress: function onPress() {
+								return navigate('graph_step', { savings: _this2.state.savings, period: _this2.state.period, ror: _this2.state.ror, increment: _this2.state.increment, sip_amount: _this2.state.sip_amount });
+							},
+							title: 'calculate SIP',
+							color: '#008080',
+							__source: {
+								fileName: _jsxFileName,
+								lineNumber: 222
+							}
+						})
+					)
+				)
+			);
+		}
+	}]);
+
+	return step_up;
+}(_react2.Component), _class.navigationOptions = {
+	title: 'Step-up SIP CALCULATOR'
+}, _temp));
+
+var styles = _reactNative.StyleSheet.create({
+	text: {
+		color: '#000000',
+		fontSize: 17,
+		textShadowRadius: 1
+	},
+	bigblue: {
+		color: '#ffffff',
+		fontWeight: 'bold',
+		fontSize: 25,
+		includeFontPadding: true,
+		fontStyle: 'normal',
+		textShadowRadius: 40
+	},
+	view: {
+		color: '#000000',
+		fontWeight: 'bold',
+		fontSize: 16,
+		alignItems: 'flex-start',
+		justifyContent: 'flex-end',
+		textAlign: 'center'
+	},
+	view1: {
+		fontWeight: 'normal',
+		fontSize: 15,
+		alignItems: 'flex-start',
+		justifyContent: 'flex-end',
+		textAlign: 'center'
+	},
+	container: {
+		height: 450,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#ffffff'
+	}
+});
